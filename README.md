@@ -1,3 +1,5 @@
+https://cool-story-bro.netlify.app/
+
 # Frontend template
 
 This is a simple react/redux/jwt template to start a project quickly
