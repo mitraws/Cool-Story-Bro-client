@@ -1,25 +1,27 @@
 import axios from "axios";
-
+import { apiUrl } from "../../config/constants";
 
 export function startLoading() {
     return {
-      type: "home/startLoading"
+      type: "detail/startLoading"
     };
   }
 
-  export async function fetchData(dispatch, getState) {
+  export function fetchData(id) {
+  return async function (dispatch, getState) {
     dispatch(startLoading());
     const response = await axios.get(
-      `http://localhost:4000`
+      `${apiUrl}/homepages/${id}`
     );
-    dispatch(dataFetched(response.data));
-    console.log("what data is dispatched?", response.data)
+    dispatch(dataFetched(response.data.homepage));
+    // console.log("what data is dispatched?", response.data.homepage)
 
-  }
+  }}
+  
 
   export function dataFetched(data) {
     return {
-      type: "home/dataFetched",
+      type: "detail/dataFetched",
       payload: data
       //payload needs to get data from database 
       //and therefore this data is passed as an argument: 

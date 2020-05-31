@@ -1,7 +1,8 @@
 export const selectLoading = state => {
-    return state.database.loading
+    return state.detail.loading
   }
 
   export const selectData = state => {
-    return state.database.data
+    return state.detail.data
   }
+
