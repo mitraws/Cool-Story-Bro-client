@@ -9,7 +9,7 @@ import { selectData } from "../../store/detail/selectors";
 
 export default function Detail() {
   const dispatch = useDispatch();
-  const data = useSelector(selectData);
+  const homepage = useSelector(selectData);
   const { id } = useParams();
 
   // console.log("id?", id)
@@ -24,15 +24,15 @@ export default function Detail() {
   return (
     <>
       <Homepage
-        id={data.id}
-        title={data.title}
-        description={data.description}
-        backgroundColor={data.backgroundColor}
-        color={data.color}
+        id={homepage.id}
+        title={homepage.title}
+        description={homepage.description}
+        backgroundColor={homepage.backgroundColor}
+        color={homepage.color}
         showLink={false}
       />
       <Container>
-        <StoryCarousel data={data} />
+        <StoryCarousel homepage={homepage} />
       </Container>
     </>
   )

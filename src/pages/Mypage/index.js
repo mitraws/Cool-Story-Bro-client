@@ -8,24 +8,30 @@ import Homepage from "../../components/Homepage";
 import StoryCarousel from "../../components/StoryCarousel";
 
 export default function Mypage() {
-  const { token, data, id } = useSelector(selectUser);
+  const { token, homepage, id } = useSelector(selectUser);
+  const history = useHistory();
 
-  if (data === null) {
+  if (token === null) {
+    history.push("/");
+  }
+  console.log("Token:",token, "homepage:", homepage, "id:", id)
+
+  if (homepage === null) {
     return <Loading />;
   }
 
   return (
     <>
       <Homepage
-        id={data.id}
-        title={data.title}
-        description={data.description}
-        backgroundColor={data.backgroundColor}
-        color={data.color}
+        id={homepage.id}
+        title={homepage.title}
+        description={homepage.description}
+        backgroundColor={homepage.backgroundColor}
+        color={homepage.color}
         showLink={false}
       />
       <Container>
-        <StoryCarousel data={data} />
+        <StoryCarousel homepage={homepage} />
       </Container>
     </>
   )

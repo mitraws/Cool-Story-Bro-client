@@ -3,7 +3,8 @@ import { LOG_OUT, LOGIN_SUCCESS, TOKEN_STILL_VALID, HOMEPAGE_UPDATED } from "./a
 const initialState = {
   token: localStorage.getItem("token"),
   name: null,
-  email: null
+  email: null,
+  homepage: null
 };
 
 export default (state = initialState, action) => {
