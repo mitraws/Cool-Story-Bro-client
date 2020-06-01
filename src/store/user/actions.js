@@ -7,7 +7,7 @@ import {
   showMessageWithTimeout,
   setMessage
 } from "../appState/actions";
-
+import myAxios from "../../axios";
 
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const STORY_POST_SUCCESS = "STORY_POST_SUCCESS";
