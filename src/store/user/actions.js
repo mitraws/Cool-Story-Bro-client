@@ -11,6 +11,7 @@ import {
 
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const STORY_POST_SUCCESS = "STORY_POST_SUCCESS";
+export const STORY_DELETE_SUCCESS = "STORY_DELETE_SUCCESS";
 export const TOKEN_STILL_VALID = "TOKEN_STILL_VALID";
 export const LOG_OUT = "LOG_OUT";
 export const HOMEPAGE_UPDATED = "HOMEPAGE_UPDATED";
@@ -28,6 +29,11 @@ const storyPostSuccess = userWithToken => {
     payload: userWithToken
   };
 };
+
+export const storyDeleteSuccess = storyId => ({
+  type: STORY_DELETE_SUCCESS,
+  payload: storyId
+});
 
 const tokenStillValid = userWithoutToken => ({
   type: TOKEN_STILL_VALID,
@@ -180,5 +186,31 @@ export const postStory = (name, content, imageUrl) => {
     );
     dispatch(storyPostSuccess(response.data.story));
     dispatch(appDoneLoading());
+  };
+};
+
+export const deleteStory = storyId => {
+  return async (dispatch, getState) => {
+    dispatch(appLoading());
+    const { homepage, token } = selectUser(getState());
+    const homepageId = homepage.id;
+    // make an axios request to delete
+    // and console.log the response if success
+    try {
+      const response = await myAxios.delete(
+        `/homepages/${homepageId}/stories/${storyId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      );
+
+      console.log("Story deleted?", response.data);
+      dispatch(storyDeleteSuccess(storyId));
+      dispatch(appDoneLoading());
+    } catch (e) {
+      console.error(e);
+    }
   };
 };
