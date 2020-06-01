@@ -2,11 +2,11 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchData } from "../../store/homepage/actions";
 import { selectLoading, selectData } from "../../store/homepage/selectors";
-import { Link } from "react-router-dom";
-import Jumbotron from "react-bootstrap/Jumbotron";
 import Container from "react-bootstrap/Container";
+import Homepage from "../../components/Homepage";
+import Jumbotron from "react-bootstrap/Jumbotron";
 
-export default function Homepage() {
+export default function HomePage() {
   const dispatch = useDispatch();
   const loading = useSelector(selectLoading);
   const data = useSelector(selectData);
@@ -24,19 +24,14 @@ export default function Homepage() {
         {loading ? <p>Loading...</p> : null}
         {data.map((homepage) => {
           return (
-            <div
-              style={{
-                color: homepage.color,
-                backgroundColor: homepage.backgroundColor,
-              }}
+            <Homepage
               key={homepage.id}
-            >
-              <h1>{homepage.title} </h1>
-              <p>{homepage.description}</p>
-              <Link to={`/homepages/${homepage.id}`}>
-                <button>Visit Page</button>
-              </Link>
-            </div>
+              id={homepage.id}
+              title={homepage.title} 
+              description={homepage.description}
+              backgroundColor={homepage.backgroundColor}
+              color={homepage.color}
+              showLink={true}                />
           );
         })}
       </Container>

@@ -1,6 +1,6 @@
 const initialState = {
   loading: true,
-  data: [],
+   data:[],
 };
 
 export default (state = initialState, action) => {
@@ -10,9 +10,8 @@ export default (state = initialState, action) => {
     }
     case "home/dataFetched": {
       return {
-        ...state,
         loading: false,
-        data: [...state.data, ...action.payload],
+        data: action.payload,
       };
     }
     default: {
@@ -20,3 +19,29 @@ export default (state = initialState, action) => {
     }
   }
 }
+
+// rose's reducer for homepage
+// const initialState = {
+//   loading: false,
+//   homepages: [],
+// };
+
+// export default (state = initialState, action) => {
+//   switch (action.type) {
+//     case "START_LOADING": {
+//       return {
+//         ...state,
+//         loading: true,
+//       };
+//     }
+//     case "HOMEPAGE_FETCHED": {
+//       return {
+//         loading: false,
+//         homepages: action.payload,
+//       };
+//     }
+//     default: {
+//       return state;
+//     }
+//   }
+// };

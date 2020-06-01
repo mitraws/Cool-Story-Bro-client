@@ -1,18 +1,20 @@
 import axios from "axios";
 import { apiUrl } from "../../config/constants";
 
-export function startLoading() {
-    return {
-      type: "detail/startLoading"
-    };
-  }
+// export function startLoading() {
+//     return {
+//       type: "detail/startLoading"
+//     };
+//   }
 
   export function fetchData(id) {
   return async function (dispatch, getState) {
-    dispatch(startLoading());
+    // dispatch(startLoading());
     const response = await axios.get(
       `${apiUrl}/homepages/${id}`
     );
+    // console.log("what data is dispatched?", response.data.homepage.stories)
+
     dispatch(dataFetched(response.data.homepage));
     // console.log("what data is dispatched?", response.data.homepage)
 
@@ -32,3 +34,4 @@ export function startLoading() {
     };
   }
 
+  ///

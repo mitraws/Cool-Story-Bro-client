@@ -1,23 +1,31 @@
 
 const initialState = {
-  loading: true,
-  data: [],
+  stories: [],
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case "detail/startLoading": {
-      return state;
-    }
     case "detail/dataFetched": {
-      return {
-        ...state,
-        loading: false,
-        data: [...state.data, action.payload],
-      };
+      return {...state, ...action.payload};
     }
     default: {
       return state;
     }
   }
 }
+
+// [state, ]
+// rose's reducer :)
+// const initialState = {
+//   stories: [],
+// };
+
+// export default (state = initialState, { type, payload }) => {
+//   switch (type) {
+//     case "HOMEPAGE_DETAILS_FETCHED": {
+//       return { ...state, ...payload };
+//     }
+//     default:
+//       return state;
+//   }
+// };

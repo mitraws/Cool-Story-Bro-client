@@ -3,6 +3,6 @@ export const selectLoading = state => {
   }
 
   export const selectData = state => {
-    return state.detail.data
+    return state.detail
   }
 

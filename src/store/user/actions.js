@@ -1,6 +1,6 @@
 import { apiUrl } from "../../config/constants";
 import axios from "axios";
-import { selectToken } from "./selectors";
+import { selectToken, selectUser } from "./selectors";
 import {
   appLoading,
   appDoneLoading,
@@ -8,9 +8,11 @@ import {
   setMessage
 } from "../appState/actions";
 
+
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const TOKEN_STILL_VALID = "TOKEN_STILL_VALID";
 export const LOG_OUT = "LOG_OUT";
+export const HOMEPAGE_UPDATED = "HOMEPAGE_UPDATED";
 
 const loginSuccess = userWithToken => {
   return {
@@ -25,6 +27,11 @@ const tokenStillValid = userWithoutToken => ({
 });
 
 export const logOut = () => ({ type: LOG_OUT });
+
+export const homepageUpdated = homepage => ({
+  type: HOMEPAGE_UPDATED,
+  payload: homepage
+});
 
 export const signUp = (name, email, password) => {
   return async (dispatch, getState) => {
@@ -107,5 +114,34 @@ export const getUserWithStoredToken = () => {
       dispatch(logOut());
       dispatch(appDoneLoading());
     }
+  };
+};
+
+export const updateMyPage = (title, description, backgroundColor, color) => {
+  return async (dispatch, getState) => {
+    const { homepage, token } = selectUser(getState());
+    dispatch(appLoading());
+
+    const response = await axios.patch(
+      `${apiUrl}/homepages/${homepage.id}`,
+      {
+        title,
+        description,
+        backgroundColor,
+        color
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+    // console.log(response);
+
+    dispatch(
+      showMessageWithTimeout("success", false, "update successfull", 3000)
+    );
+    dispatch(homepageUpdated(response.data.homepage));
+    dispatch(appDoneLoading());
   };
 };

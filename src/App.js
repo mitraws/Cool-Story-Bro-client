@@ -9,6 +9,8 @@ import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
 import HomePage from "./pages/Home";
 import Detail from "./pages/Detail";
+import MyHomepage from "./pages/Mypage";
+
 
 import { useDispatch, useSelector } from "react-redux";
 import { selectAppLoading } from "./store/appState/selectors";
@@ -33,6 +35,7 @@ function App() {
         <Route path="/signup" component={SignUp} />
         <Route path="/login" component={Login} />
         <Route path="/homepages/:id" component={Detail} />
+        <Route path="/myhomepage" component={MyHomepage} />
       </Switch>
     </div>
   );
