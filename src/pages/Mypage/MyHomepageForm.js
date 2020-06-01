@@ -3,11 +3,11 @@ import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import { useSelector, useDispatch } from "react-redux";
-import { selectMyHomepage } from "../../store/user/selectors";
+import { selectMypage } from "../../store/user/selectors";
 import { updateMyPage } from "../../store/user/actions";
 
 export default function MyHomepageForm() {
-    const homepage = useSelector(selectMyHomepage);
+    const homepage = useSelector(selectMypage);
     const dispatch = useDispatch();
     const [title, setTitle] = useState(homepage.title);
     const [description, setDescription] = useState(homepage.description || "");
