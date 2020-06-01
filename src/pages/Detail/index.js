@@ -13,7 +13,7 @@ export default function Detail() {
   const { id } = useParams();
 
   // console.log("id?", id)
-  // console.log("detail data?????", data);
+  // console.log("detail data?????", homepage);
   // console.log("whats story??", data.stories);
   
 

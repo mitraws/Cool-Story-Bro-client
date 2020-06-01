@@ -19,7 +19,6 @@ import { apiUrl } from "../../config/constants";
     // console.log("what data is dispatched?", response.data.homepage)
 
   }}
-  
 
   export function dataFetched(data) {
     return {

@@ -1,4 +1,4 @@
-import { LOG_OUT, LOGIN_SUCCESS, TOKEN_STILL_VALID, HOMEPAGE_UPDATED } from "./actions";
+import { LOG_OUT, LOGIN_SUCCESS, TOKEN_STILL_VALID, HOMEPAGE_UPDATED, STORY_POST_SUCCESS } from "./actions";
 
 const initialState = {
   token: localStorage.getItem("token"),
@@ -13,6 +13,14 @@ export default (state = initialState, action) => {
       localStorage.setItem("token", action.payload.token);
       return { ...state, ...action.payload };
 
+      case STORY_POST_SUCCESS:
+        return {
+          ...state,
+          homepage: {
+            ...state.homepage,
+            stories: [...state.homepage.stories, action.payload]
+          }
+        };
     case LOG_OUT:
       localStorage.removeItem("token");
       return { ...initialState, token: null };
